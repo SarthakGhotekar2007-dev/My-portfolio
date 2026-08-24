@@ -1,0 +1,216 @@
+.github-section {
+  background-color: transparent;
+  padding: 100px 5%;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.github-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.github-card-wrapper {
+  perspective: 1000px;
+}
+
+.github-card {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  background: #0B1220;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 24px;
+  padding: 50px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.github-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: radial-gradient(
+    circle 350px at var(--mouse-x) var(--mouse-y),
+    rgba(79, 140, 255, 0.15),
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.github-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.5), rgba(139, 92, 246, 0.5), rgba(79, 140, 255, 0.5));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.github-card:hover {
+  background: #101B30;
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  border-color: transparent;
+}
+
+.github-card:hover::before, .github-card:hover::after {
+  opacity: 1;
+}
+
+.card-inner-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.github-bg-icon {
+  position: absolute;
+  right: -50px;
+  bottom: -50px;
+  font-size: 300px;
+  color: rgba(255, 255, 255, 0.02);
+  transform: rotate(-15deg) translateZ(1px);
+  pointer-events: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 0;
+}
+
+.github-card:hover .github-bg-icon {
+  color: rgba(255, 255, 255, 0.04);
+  transform: rotate(-15deg) translateZ(15px);
+}
+
+.github-card {
+  clip-path: inset(0 0 0 0 round 24px);
+}
+
+.github-info {
+  position: relative;
+  z-index: 1;
+  transform: translateZ(0);
+  transition: transform 0.3s ease;
+}
+
+.github-card:hover .github-info {
+  transform: translateZ(30px);
+}
+
+.github-info h3 {
+  font-size: 2.2rem;
+  color: var(--about-text-main);
+  margin: 0 0 15px 0;
+  font-weight: 800;
+}
+
+.github-info p {
+  font-size: 1.1rem;
+  color: var(--about-text-sec);
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0 0 30px 0;
+}
+
+.github-stats-mock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 30px;
+  color: var(--about-text-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--about-text-main);
+  color: #0f172a;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  transform: translateZ(20px);
+}
+
+.explore-arrow {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.github-btn:hover {
+  background: var(--about-cyan);
+  transform: translateY(-2px) translateZ(30px);
+  box-shadow: 0 10px 20px rgba(34, 211, 238, 0.2);
+}
+
+.github-btn:hover .explore-arrow {
+  transform: translateX(4px) translateY(-4px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .github-content {
+    flex-direction: column;
+    padding: 30px;
+    gap: 30px;
+  }
+  
+  .github-info {
+    text-align: center;
+  }
+
+  .github-card {
+    padding: 30px;
+  }
+  .github-info h3 {
+    font-size: 1.8rem;
+  }
+  .github-bg-icon {
+    font-size: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .github-section {
+    padding: 60px 20px;
+  }
+  .github-card {
+    border-radius: 16px;
+  }
+  .github-content {
+    padding: 20px;
+  }
+  .github-info h3 {
+    font-size: 1.6rem;
+  }
+  .github-info p {
+    font-size: 0.95rem;
+  }
+  .github-stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

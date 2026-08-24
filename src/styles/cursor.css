@@ -1,0 +1,112 @@
+/* cursor.css */
+
+/* Hide default cursor on devices that support hover/fine pointers */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  body:not(.no-custom-cursor),
+  body:not(.no-custom-cursor) * {
+    cursor: none !important;
+  }
+}
+
+/* Base Cursor Container */
+.custom-cursor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Center Dot */
+.cursor-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: #22D3EE;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.3s ease;
+  z-index: 10000;
+}
+
+/* Outer Ring */
+.cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid #4F8CFF;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, width, height, background-color, border-color, box-shadow;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  
+  /* Blue and subtle violet glow */
+  box-shadow: 0 0 10px rgba(79, 140, 255, 0.4), 0 0 20px rgba(139, 92, 246, 0.2);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Label for Links */
+.cursor-label {
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Hidden state */
+.cursor-hidden {
+  opacity: 0;
+}
+
+/* Click state */
+.cursor-clicking .cursor-ring {
+  transform: scale(0.8) translate(-50%, -50%) !important; 
+  /* Note: scale transform needs to be composed properly with JS, so it's handled in JS or via a separate wrapper.
+     Actually, better to use a child element for scaling or scale via JS. We'll use a wrapper or just let JS handle the scale.
+     To make it simple without JS conflicting with CSS transform, we use scale on a child or use zoom.
+     Let's keep it simple: JS sets translate3d, CSS adds scale if we need to. But translate is set inline.
+     So we handle scale inside JS. 
+  */
+}
+
+/* Hover States */
+/* 1. Button / Card Hover */
+.cursor-hover-button .cursor-ring {
+  width: 55px;
+  height: 55px;
+  background-color: rgba(79, 140, 255, 0.1);
+  border-color: #8B5CF6;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.6), 0 0 25px rgba(79, 140, 255, 0.4);
+}
+.cursor-hover-button .cursor-dot {
+  opacity: 0;
+}
+
+/* 2. Link Hover */
+.cursor-hover-link .cursor-ring {
+  width: 65px;
+  height: 65px;
+  background-color: rgba(139, 92, 246, 0.2);
+  border-color: #8B5CF6;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.8), 0 0 30px rgba(79, 140, 255, 0.6);
+}
+.cursor-hover-link .cursor-dot {
+  opacity: 0;
+}
+.cursor-hover-link .cursor-label {
+  opacity: 1;
+}

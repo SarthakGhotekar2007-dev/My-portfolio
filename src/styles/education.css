@@ -1,0 +1,324 @@
+/* Education Timeline Styles */
+
+:root {
+  --edu-bg: #05070D;
+  --edu-card: #0B1020;
+  --edu-border: #1E293B;
+  --edu-blue: #4F8CFF;
+  --edu-cyan: #22D3EE;
+  --edu-violet: #8B5CF6;
+  --edu-text: #F8FAFC;
+  --edu-muted: #94A3B8;
+}
+
+#education {
+  padding: 120px 40px;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  color: var(--edu-text);
+  font-family: inherit;
+}
+
+/* Background Effects */
+.edu-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.edu-glow-cyan {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 60%);
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Header */
+.edu-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edu-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+.edu-subtitle {
+  font-size: 1.15rem;
+  color: var(--edu-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Timeline Layout */
+.timeline-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding: 20px 0;
+}
+
+/* Center Line */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(79, 140, 255, 0.3), rgba(139, 92, 246, 0.3), transparent);
+  transform-origin: top;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* Timeline Item */
+.timeline-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-item.left {
+  flex-direction: row-reverse;
+}
+
+/* Content Wrapper */
+.timeline-content {
+  width: 45%;
+  perspective: 1000px;
+}
+
+/* Empty space for the other side */
+.timeline-empty {
+  width: 45%;
+}
+
+/* Glowing Node */
+.timeline-node {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--edu-bg);
+  border: 3px solid var(--edu-blue);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px rgba(79, 140, 255, 0.6);
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.timeline-item.current .timeline-node {
+  border-color: var(--edu-cyan);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.8);
+  animation: pulseNode 2s infinite;
+}
+
+@keyframes pulseNode {
+  0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(34, 211, 238, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+}
+
+/* Education Card */
+.edu-card {
+  background: var(--edu-card);
+  border: 1px solid var(--edu-border);
+  padding: 30px;
+  border-radius: 16px;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .edu-card:hover {
+    transform: translateY(-6px) rotateX(2deg);
+    border-color: var(--edu-blue);
+    box-shadow: 0 15px 35px rgba(79, 140, 255, 0.15);
+  }
+}
+
+/* BCA Highlight Card */
+.edu-card.highlight {
+  background: linear-gradient(var(--edu-card), var(--edu-card)) padding-box,
+              linear-gradient(60deg, var(--edu-blue), var(--edu-cyan), var(--edu-violet)) border-box;
+  border: 2px solid transparent;
+  animation: gradientBorderCard 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientBorderCard {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.edu-card.highlight:hover {
+  box-shadow: 0 15px 40px rgba(34, 211, 238, 0.2);
+}
+
+.current-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(34, 211, 238, 0.1);
+  color: var(--edu-cyan);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.current-badge .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--edu-cyan);
+  border-radius: 50%;
+  animation: pulseGreen 2s infinite;
+}
+
+/* Card Content Details */
+.edu-year {
+  font-size: 0.9rem;
+  color: var(--edu-muted);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.edu-degree-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.edu-icon {
+  font-size: 1.6rem;
+  color: var(--edu-blue);
+}
+
+.edu-card.highlight .edu-icon {
+  color: var(--edu-cyan);
+}
+
+.edu-degree {
+  font-size: 1.3rem;
+  color: var(--edu-text);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.edu-inst {
+  font-size: 1rem;
+  color: var(--edu-muted);
+  margin: 0 0 20px 0;
+}
+
+.edu-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.95rem;
+}
+
+.edu-status {
+  color: var(--edu-cyan);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edu-percentage {
+  color: var(--edu-blue);
+  font-weight: 700;
+  font-size: 1.1rem;
+  font-family: monospace;
+}
+
+/* Connection Footer */
+.edu-connection {
+  text-align: center;
+  margin-top: 80px;
+  position: relative;
+  z-index: 2;
+  color: var(--edu-muted);
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .education-section {
+    padding: 80px 20px;
+  }
+
+  .timeline-container {
+    padding-left: 30px;
+  }
+
+  .timeline-line {
+    left: 10px;
+    transform: translateX(0);
+  }
+
+  .timeline-item {
+    flex-direction: column !important;
+    align-items: flex-start;
+  }
+
+  .timeline-content {
+    width: 100%;
+  }
+
+  .timeline-empty {
+    display: none;
+  }
+
+  .timeline-node {
+    left: 0;
+    transform: translateX(0); /* Aligned with line */
+  }
+
+  .edu-title {
+    font-size: 2.5rem;
+  }
+}

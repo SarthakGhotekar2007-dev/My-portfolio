@@ -1,0 +1,290 @@
+.whatido-section {
+  background-color: transparent;
+  padding: 100px 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating Background Elements */
+.floating-bg-elements {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: floatOrb 20s infinite ease-in-out;
+}
+
+.blue-orb {
+  top: 10%;
+  left: 10%;
+  width: 400px;
+  height: 400px;
+  background: var(--accent-primary, #4F8CFF);
+}
+
+.violet-orb {
+  bottom: -10%;
+  right: 5%;
+  width: 500px;
+  height: 500px;
+  background: var(--accent-violet, #8B5CF6);
+  animation-delay: -10s;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.5;
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+}
+
+.whatido-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.section-header.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(34, 211, 238, 0.1);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  color: #22D3EE;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 30px;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.section-subtitle {
+  color: #94A3B8;
+  max-width: 600px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+/* Grid */
+.whatido-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.card-wrapper {
+  perspective: 1000px; /* Perspective applied to wrapper for children 3D transforms */
+}
+
+/* Service Card */
+.whatido-card {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  background: #0B1220;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 24px;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Mouse Following Spotlight */
+.whatido-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: radial-gradient(
+    circle 250px at var(--mouse-x) var(--mouse-y),
+    rgba(79, 140, 255, 0.15),
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Animated Gradient Border on Hover */
+.whatido-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.5), rgba(139, 92, 246, 0.5), rgba(79, 140, 255, 0.5));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.whatido-grid:hover .whatido-card {
+  opacity: 0.75;
+}
+
+.whatido-grid:hover .whatido-card:hover {
+  opacity: 1;
+}
+
+.whatido-card:hover {
+  background: #101B30;
+  transform: translateY(-8px) scale(1.015); /* Lift effect combined with JS tilt */
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  border-color: transparent; /* Hide normal border to show gradient */
+}
+
+.whatido-card:hover::before {
+  opacity: 1;
+}
+
+.whatido-card:hover::after {
+  opacity: 1;
+}
+
+/* Inner Content for Depth */
+.card-inner-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.whatido-icon-container {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, rgba(79, 140, 255, 0.15), rgba(139, 92, 246, 0.15));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #F8FAFC;
+  margin-bottom: 24px;
+  transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatido-card:hover .whatido-icon-container {
+  transform: translateZ(35px) scale(1.08);
+  color: #22D3EE;
+  box-shadow: 0 10px 20px rgba(34, 211, 238, 0.2);
+}
+
+.whatido-title {
+  color: #F8FAFC;
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  transition: transform 0.3s ease;
+  line-height: 1.3;
+}
+
+.whatido-card:hover .whatido-title {
+  transform: translateZ(25px);
+}
+
+.whatido-desc {
+  color: #94A3B8;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+  flex-grow: 1;
+}
+
+.whatido-card:hover .whatido-desc {
+  transform: translateZ(15px);
+}
+
+.whatido-explore {
+  font-size: 14px;
+  color: #94A3B8;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  transform: translateZ(0px);
+}
+
+.explore-arrow {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.whatido-card:hover .whatido-explore {
+  transform: translateZ(30px);
+  color: #4F8CFF;
+}
+
+.whatido-card:hover .explore-arrow {
+  transform: translateX(4px) translateY(-4px) rotate(-45deg);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .whatido-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .whatido-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .whatido-section {
+    padding: 80px 20px;
+  }
+  .whatido-card {
+    padding: 30px 20px;
+  }
+}
+
+/* Disable 3D tilt on touch devices */
+@media (hover: none) {
+  .whatido-card {
+    transform: none !important;
+  }
+  .whatido-card:hover {
+    transform: translateY(-5px) !important;
+  }
+  .whatido-card::before {
+    display: none;
+  }
+}
