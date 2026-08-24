@@ -215,28 +215,28 @@ const About = () => {
             <div className="highlights-grid">
               <HighlightCard
                 icon={<FaBrain />}
-                title="AI & Engineering"
+                title="AI Applications"
                 description="Building intelligent systems and AI-powered apps (2026+)"
                 delay={0.3}
                 gradientClass="cyan"
               />
               <HighlightCard
                 icon={<FaCode />}
-                title="Full Stack"
+                title="Full Stack Development"
                 description="Scalable web apps with React, Python and PostgreSQL (2025)"
                 delay={0.4}
                 gradientClass="blue"
               />
               <HighlightCard
                 icon={<FaBolt />}
-                title="Performance"
+                title="Performance Optimization"
                 description="Fast, responsive and optimized user interfaces."
                 delay={0.5}
                 gradientClass="violet"
               />
               <HighlightCard
                 icon={<FaPuzzlePiece />}
-                title="Architecture"
+                title="Architecture Design"
                 description="Clean, maintainable and modular code structures."
                 delay={0.6}
                 gradientClass="cyan"
